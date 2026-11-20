@@ -10,14 +10,14 @@
 <meta name="description" content="NULLS CLIMB: a fan-made wall-jump climber for the Nulls community. Tap to jump, slice glitches, protect your memory. No wallet, no signup.">
 <meta property="og:title" content="NULLS CLIMB">
 <meta property="og:description" content="Tap to jump wall to wall. Slice glitches. DO NOT ERASE. Fan-made for @nullsxyz.">
-<meta property="og:image" content="https://boooooo-droid.github.io/nulls-climb/assets/og.png">
+<meta property="og:image" content="https://boooooo-droid.github.io/nulls-climb/assets/og_v2.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://boooooo-droid.github.io/nulls-climb/assets/og.png">
+<meta name="twitter:image" content="https://boooooo-droid.github.io/nulls-climb/assets/og_v2.png">
 <meta property="og:url" content="https://boooooo-droid.github.io/nulls-climb/">
 <link rel="icon" href="assets/bomb.png">
-<link rel="apple-touch-icon" href="assets/icon.png">
+<link rel="apple-touch-icon" href="assets/icon.png?v=2">
 <link rel="preload" href="assets/silk700.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=1">
+<link rel="stylesheet" href="style.v2.css">
 </head>
 <body>
 <div id="app">
@@ -25,7 +25,7 @@
 
   <div id="hud" class="hidden">
     <div class="hud-top">
-      <div class="hud-l"><span class="lbl">KILLS</span><b id="hKills">0</b></div>
+      <div class="hud-l"><span class="lbl">SCORE</span><b id="hScore">0</b></div>
       <div class="hud-c"><b id="hMeters">0</b><span class="unit">m</span></div>
       <div class="hud-r"><span class="lbl">BEST</span><b id="hBest">0</b></div>
     </div>
@@ -33,6 +33,7 @@
       <div id="hShield" class="shield off"><img src="assets/card.png" alt=""><span>SHIELD</span></div>
       <div id="hBoost" class="boost"><i></i><i></i><i></i><i></i><i></i><span>REBOOT</span></div>
     </div>
+    <div id="hCombo" class="combo hidden">x2</div>
     <button id="btnPause" class="iconbtn" aria-label="Pause">II</button>
   </div>
 
@@ -49,16 +50,18 @@
     <p class="tag">jump walls · slice glitches · DO NOT ERASE</p>
     <div class="charcard">
       <div class="charimg"><img id="sChar" alt=""></div>
-      <div class="charinfo"><span class="lbl">UP NEXT</span><b id="sCharName"></b><span class="dots" id="sDots"></span></div>
+      <div class="charinfo"><span class="lbl">UP NEXT</span><b id="sCharName"></b><span class="perk">PERK: <em id="sPerk"></em></span><span class="dots" id="sDots"></span></div>
     </div>
     <button id="btnPlay" class="btn primary">PRESS START</button>
     <div class="how">
       <div><kbd>TAP</kbd> jump to the other wall</div>
       <div><kbd>SLICE</kbd> bombs &amp; glitches mid-jump</div>
       <div><kbd>DODGE</kbd> ERASE blocks on the walls</div>
+      <div><kbd>COMBO</kbd> chain kills in the air for x2, x3, x4…</div>
+      <div><kbd>GRAB</kbd> memory fragments &amp; the golden card</div>
       <div><kbd>5 KILLS</kbd> = REBOOT boost</div>
     </div>
-    <div class="bestline">BEST <b id="sBest">0</b>m</div>
+    <div class="bestline">BEST <b id="sBest">0</b> · TODAY <b id="sDaily">0</b></div>
     <button id="btnMute" class="iconbtn mute" aria-label="Sound">♪</button>
     <p class="fine">fan-made for <a href="https://x.com/nullsxyz" target="_blank" rel="noopener">@nullsxyz</a> · not official · no wallet, no signup</p>
   </section>
@@ -71,21 +74,26 @@
   <section id="scrOver" class="scr dim hidden">
     <div class="ovtop">MEMORY LOST</div>
     <h2 class="restored">MEMORY RESTORED<br><b id="oMeters">0</b><span>m</span></h2>
-    <div class="stats">
-      <div><span class="lbl">KILLS</span><b id="oKills">0</b></div>
-      <div><span class="lbl">BEST</span><b id="oBest">0</b>m</div>
-      <div><span class="lbl">PLAYED AS</span><b id="oPlayed"></b></div>
-    </div>
+    <div class="scoreline">SCORE <b id="oScore">0</b> <small>as <i id="oPlayed"></i></small></div>
     <div id="oNew" class="newbest hidden">NEW BEST!</div>
+    <div class="grid">
+      <div><span class="lbl">BEST</span><b id="oBest">0</b></div>
+      <div><span class="lbl">TODAY</span><b id="oDaily">0</b></div>
+      <div><span class="lbl">KILLS</span><b id="oKills">0</b></div>
+      <div><span class="lbl">TOP COMBO</span><b id="oCombo">x0</b></div>
+      <div><span class="lbl">FRAGMENTS</span><b id="oFrags">0</b></div>
+      <div><span class="lbl">NEAR MISS</span><b id="oNear">0</b></div>
+      <div><span class="lbl">GOLD CARDS</span><b id="oGold">0</b></div>
+    </div>
     <div class="charcard small">
       <div class="charimg"><img id="oChar" alt=""></div>
-      <div class="charinfo"><span class="lbl">NEXT NULL</span><b id="oCharName"></b></div>
+      <div class="charinfo"><span class="lbl">NEXT NULL</span><b id="oCharName"></b><span class="perk"><em id="oPerk"></em></span></div>
     </div>
     <button id="btnRetry" class="btn primary">RETRY</button>
     <a id="btnShare" class="btn x" target="_blank" rel="noopener">SHARE ON 𝕏</a>
     <button id="btnHome" class="btn ghost">MENU</button>
   </section>
 </div>
-<script src="game.js?v=1"></script>
+<script src="game.v2.js"></script>
 </body>
 </html>
