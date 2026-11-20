@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#07080c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>NULLS CLIMB · fan-made mini game</title>
+<meta name="description" content="NULLS CLIMB: a fan-made wall-jump climber for the Nulls community. Tap to jump, slice glitches, protect your memory. No wallet, no signup.">
+<meta property="og:title" content="NULLS CLIMB">
+<meta property="og:description" content="Tap to jump wall to wall. Slice glitches. DO NOT ERASE. Fan-made for @nullsxyz.">
+<meta property="og:image" content="https://boooooo-droid.github.io/nulls-climb/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://boooooo-droid.github.io/nulls-climb/assets/og.png">
+<meta property="og:url" content="https://boooooo-droid.github.io/nulls-climb/">
+<link rel="icon" href="assets/bomb.png">
+<link rel="apple-touch-icon" href="assets/icon.png">
+<link rel="preload" href="assets/silk700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+<div id="app">
+  <canvas id="cv"></canvas>
+
+  <div id="hud" class="hidden">
+    <div class="hud-top">
+      <div class="hud-l"><span class="lbl">KILLS</span><b id="hKills">0</b></div>
+      <div class="hud-c"><b id="hMeters">0</b><span class="unit">m</span></div>
+      <div class="hud-r"><span class="lbl">BEST</span><b id="hBest">0</b></div>
+    </div>
+    <div class="hud-row">
+      <div id="hShield" class="shield off"><img src="assets/card.png" alt=""><span>SHIELD</span></div>
+      <div id="hBoost" class="boost"><i></i><i></i><i></i><i></i><i></i><span>REBOOT</span></div>
+    </div>
+    <button id="btnPause" class="iconbtn" aria-label="Pause">II</button>
+  </div>
+
+  <div id="zone" class="zone"></div>
+
+  <section id="scrLoad" class="scr">
+    <img class="wm" src="assets/wordmark.png" alt="nulls">
+    <div class="loadtxt">BOOTING<span id="ldPct"> 0%</span></div>
+  </section>
+
+  <section id="scrStart" class="scr hidden">
+    <img class="wm" src="assets/wordmark.png" alt="nulls">
+    <h1 class="title">CLIMB</h1>
+    <p class="tag">jump walls · slice glitches · DO NOT ERASE</p>
+    <div class="charcard">
+      <div class="charimg"><img id="sChar" alt=""></div>
+      <div class="charinfo"><span class="lbl">UP NEXT</span><b id="sCharName"></b><span class="dots" id="sDots"></span></div>
+    </div>
+    <button id="btnPlay" class="btn primary">PRESS START</button>
+    <div class="how">
+      <div><kbd>TAP</kbd> jump to the other wall</div>
+      <div><kbd>SLICE</kbd> bombs &amp; glitches mid-jump</div>
+      <div><kbd>DODGE</kbd> ERASE blocks on the walls</div>
+      <div><kbd>5 KILLS</kbd> = REBOOT boost</div>
+    </div>
+    <div class="bestline">BEST <b id="sBest">0</b>m</div>
+    <button id="btnMute" class="iconbtn mute" aria-label="Sound">♪</button>
+    <p class="fine">fan-made for <a href="https://x.com/nullsxyz" target="_blank" rel="noopener">@nullsxyz</a> · not official · no wallet, no signup</p>
+  </section>
+
+  <section id="scrPause" class="scr dim hidden">
+    <h2 class="big">PAUSED</h2>
+    <button id="btnResume" class="btn primary">RESUME</button>
+  </section>
+
+  <section id="scrOver" class="scr dim hidden">
+    <div class="ovtop">MEMORY LOST</div>
+    <h2 class="restored">MEMORY RESTORED<br><b id="oMeters">0</b><span>m</span></h2>
+    <div class="stats">
+      <div><span class="lbl">KILLS</span><b id="oKills">0</b></div>
+      <div><span class="lbl">BEST</span><b id="oBest">0</b>m</div>
+      <div><span class="lbl">PLAYED AS</span><b id="oPlayed"></b></div>
+    </div>
+    <div id="oNew" class="newbest hidden">NEW BEST!</div>
+    <div class="charcard small">
+      <div class="charimg"><img id="oChar" alt=""></div>
+      <div class="charinfo"><span class="lbl">NEXT NULL</span><b id="oCharName"></b></div>
+    </div>
+    <button id="btnRetry" class="btn primary">RETRY</button>
+    <a id="btnShare" class="btn x" target="_blank" rel="noopener">SHARE ON 𝕏</a>
+    <button id="btnHome" class="btn ghost">MENU</button>
+  </section>
+</div>
+<script src="game.js?v=1"></script>
+</body>
+</html>
